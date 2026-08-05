@@ -8,6 +8,15 @@
   grid-template-columns: 1fr;
   gap: 24px;
 }
+.team-section-head { margin-bottom: 32px; }
+.team-section-title {
+  margin: 0;
+  font-size: clamp(30px, 3.7vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variation-settings: 'wght' 650;
+}
+.team-agents-section { padding-top: 32px; }
 @media (min-width: 640px) {
   .team-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -23,6 +32,17 @@
   padding: 32px 24px;
   transition: border-color 0.3s ease;
 }
+.team-card-person { min-height: 220px; }
+.team-card-person.is-founder { border-color: rgba(250, 71, 33, 0.55); }
+.team-index {
+  display: block;
+  margin-bottom: 34px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.42);
+}
+.team-card-person.is-founder .team-index { color: var(--jumper-orange, #ff6b00); }
 .team-card:hover {
   border-color: rgba(255,255,255,0.2);
 }

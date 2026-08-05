@@ -35,6 +35,23 @@
   color: rgba(255,255,255,0.5);
   font-variation-settings: 'wght' 500;
 }
+.product-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 48px;
+}
+.product-switcher a {
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px;
+  color: rgba(255,255,255,0.62);
+  font-size: 12px;
+  line-height: 1;
+  padding: 10px 13px;
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+.product-switcher a:hover, .product-switcher a:focus-visible { color: #fff; border-color: var(--jumper-orange); outline: none; }
+.product-switcher a.is-active { background: var(--jumper-orange); border-color: var(--jumper-orange); color: #000; }
 
 /* ---- BLOCK SHELL ---- */
 .oferta-block {
