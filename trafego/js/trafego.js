@@ -2,7 +2,7 @@
    trafego.js — LP Gestão de Tráfego
    Camadas: (1) produto — chips de nicho + painel
             (2) radar canvas — o raio do negócio
-            (3) cinematografia — Lenis + reveals + counters
+            (3) cinematografia — reveals + counters
    Progressive enhancement: sem JS, a página funciona estática.
    ============================================ */
 
@@ -25,17 +25,17 @@
       case: '<b>Almanara</b> — campanhas por localização, com cobertura em 100% das regiões com unidades.',
       blips: 16
     },
-    clinica: {
-      momento: 'Necessidade + confiança.',
-      canal: 'Google (intenção de busca) + Meta (descoberta).',
-      medida: 'Agendamentos e mensagens qualificadas.',
+    estetica: {
+      momento: 'Desejo, confiança e decisão local.',
+      canal: 'Google (intenção) + Meta (descoberta e prova social).',
+      medida: 'Agendamentos, avaliações e mensagens qualificadas.',
       case: '<b>Dra. Roseli Siqueira</b> — funil medido do anúncio à consulta.',
       blips: 10
     },
-    lavanderia: {
-      momento: 'Rotina + conveniência.',
-      canal: 'Google Pesquisa + Meta segmentado por bairro.',
-      medida: 'Pedidos de coleta e mensagens no WhatsApp.',
+    varejo: {
+      momento: 'Necessidade, desejo e conveniência.',
+      canal: 'Google Pesquisa + Meta segmentado por região.',
+      medida: 'Rotas, ligações, mensagens e visitas à loja.',
       case: '<b>Moldura Minuto</b> — varejo de bairro com campanha de raio.',
       blips: 12
     },
@@ -45,6 +45,13 @@
       medida: 'Visitas agendadas e matrículas.',
       case: '<b>iZi Gym</b> — funil medido por etapa: anúncio → WhatsApp → visita → matrícula.',
       blips: 14
+    },
+    imobiliaria: {
+      momento: 'Mudança de vida + oportunidade certa.',
+      canal: 'Meta (descoberta) + Google (intenção por região).',
+      medida: 'Leads qualificados, visitas agendadas e propostas.',
+      case: '<b>Fit alto</b> — segmentação por região, faixa de preço e intenção; case específico sob consulta.',
+      blips: 15
     }
   };
 
@@ -296,29 +303,8 @@
   setNiche('restaurante');
 
   /* --------------------------------------------
-     CAMADA 3 — Cinematografia (Lenis + reveals + counters)
+     CAMADA 3 — Cinematografia (reveals + counters)
      -------------------------------------------- */
-
-  // smooth scroll
-  if (!REDUCED && typeof Lenis !== 'undefined') {
-    var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-    function rafLenis(time) {
-      lenis.raf(time);
-      requestAnimationFrame(rafLenis);
-    }
-    requestAnimationFrame(rafLenis);
-
-    // âncoras via Lenis
-    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-      a.addEventListener('click', function (ev) {
-        var id = a.getAttribute('href');
-        if (id.length > 1 && document.querySelector(id)) {
-          ev.preventDefault();
-          lenis.scrollTo(id, { offset: -72 });
-        }
-      });
-    });
-  }
 
   // reveals
   var revealEls = document.querySelectorAll('[data-reveal]');
