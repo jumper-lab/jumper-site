@@ -13,6 +13,24 @@
 
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Header: esconde a marca no topo, onde o hero já exibe o wordmark. */
+  var headerBrand = document.querySelector('.site-header .brand');
+  if (headerBrand) {
+    var brandTicking = false;
+
+    function syncHeaderBrand() {
+      headerBrand.classList.toggle('is-hidden', window.scrollY <= 24);
+      brandTicking = false;
+    }
+
+    syncHeaderBrand();
+    window.addEventListener('scroll', function () {
+      if (brandTicking) return;
+      brandTicking = true;
+      requestAnimationFrame(syncHeaderBrand);
+    }, { passive: true });
+  }
+
   /* --------------------------------------------
      CAMADA 1 — Nichos (produto)
      -------------------------------------------- */
