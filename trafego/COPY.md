@@ -1,9 +1,9 @@
 # COPY — jumper.studio/trafego
-**Gestão de Tráfego para Negócios Locais** · v1.0 · 2026-08-04 · Dorian
+**Gestão de Tráfego para Negócios Locais** · v1.1 · 2026-08-05 · Dorian
 
 > Fontes: ficha comercial no Notion (PRODUTO: Tráfego v0.1) + dossiês dos cases
 > (Almanara, PdQ Haddock Lobo, Trama Casa, Dra. Roseli Siqueira, iZi Gym).
-> Decisões do Bruno (2026-08-04): sem preço na página · prova social = cases locais + grandes cases.
+> Decisões do Bruno (2026-08-05): mensalidade a partir de R$ 1.500,00 · prova social = cases locais + grandes cases; uso de logos depende de autorização das marcas.
 
 ---
 
@@ -23,7 +23,7 @@ Anti-promessa (da ficha): sem ROAS garantido, sem milagre. A honestidade É o ar
 ## HERO
 
 - Kicker: `Gestão de Tráfego · Negócios locais`
-- Statement: **Todo cliente que o seu negócio precisa está num raio de 5 km.**
+- Statement: **O cliente que seu negócio precisa conquistar está num raio de 5 km.**
 - Claim: A gente coloca a mensagem certa na tela da pessoa certa — dentro do raio do seu negócio — e mede cada real investido. Meta Ads e Google Ads operados pela equipe que já mediu mais de R$ 100 milhões em verba de mídia.
 - CTA primário: **Quero mais clientes** → WhatsApp
 - CTA ghost: Como funciona
@@ -52,14 +52,16 @@ Todo mês tem dinheiro indo embora em campanha que ninguém sabe dizer o que tro
 
 **Seu negócio tem um raio. A gente trabalha dentro dele.**
 
-Restaurante, clínica, lavanderia, academia: negócio local vive de quem está perto. Escolha o seu e veja como a campanha muda.
+Restaurante, clínica, varejo, academia e imobiliária: negócio local vive de quem está perto. Escolha o seu e veja como a campanha muda.
 
-| | Restaurante | Clínica | Lavanderia | Academia |
-|---|---|---|---|---|
-| Momento da decisão | Fome, agora, perto | Necessidade + confiança | Rotina + conveniência | Segunda-feira, verão, recomeço |
-| Canal principal | Google Pesquisa + Meta no raio das unidades | Google (intenção) + Meta (descoberta) | Google Pesquisa + Meta por bairro | Meta (gera demanda) + Google (captura) |
-| O que medimos | Pedidos, ligações, rotas, reservas | Agendamentos e mensagens qualificadas | Pedidos de coleta e mensagens | Visitas agendadas e matrículas |
-| Case no segmento | Almanara — campanhas por localização, cobertura em 100% das regiões com unidades | Dra. Roseli Siqueira — funil medido do anúncio à consulta | Moldura Minuto — varejo de bairro com campanha de raio | iZi Gym — funil medido por etapa: anúncio → WhatsApp → visita → matrícula |
+| | Restaurante | Estética / odonto | Varejo local | Academia | Imobiliária |
+|---|---|---|---|---|---|
+| Momento da decisão | Fome, agora, perto | Desejo, confiança e decisão local | Necessidade, desejo e conveniência | Segunda-feira, verão, recomeço | Mudança de vida + oportunidade certa |
+| Canal principal | Google Pesquisa + Meta no raio das unidades | Google (intenção) + Meta (descoberta e prova social) | Google Pesquisa + Meta por região | Meta (gera demanda) + Google (captura) | Meta (descoberta) + Google (intenção por região) |
+| O que medimos | Pedidos, ligações, rotas, reservas | Agendamentos, avaliações e mensagens qualificadas | Rotas, ligações, mensagens e visitas à loja | Visitas agendadas e matrículas | Leads qualificados, visitas agendadas e propostas |
+| Case / fit | Almanara — campanhas por localização, cobertura em 100% das regiões com unidades | Dra. Roseli Siqueira — funil medido do anúncio à consulta | Moldura Minuto — varejo de bairro com campanha de raio | iZi Gym — funil medido por etapa: anúncio → WhatsApp → visita → matrícula | Fit alto — segmentação por região, faixa de preço e intenção; case específico sob consulta |
+
+Fit alto também, ainda fora do seletor: **barbearias e salões de beleza**.
 
 ## COMO FUNCIONA
 
@@ -105,7 +107,7 @@ E a mesma equipe que atende Creamy, Clínica Seven e Almeida Prado.
 
 1. **Quanto preciso investir em verba de anúncio?** — A verba de mídia é sua e vai direto para as plataformas. O valor ideal depende do seu mercado e da sua região. Na primeira conversa a gente diz com franqueza se a verba que você tem dá jogo. Se não der, a gente fala.
 2. **Vocês garantem resultado?** — Não — e desconfie de quem garante. O que garantimos: operação séria, rastreamento confiável e transparência total sobre o que cada real trouxe de volta.
-3. **Preciso ter site?** — Não necessariamente. Muitos negócios locais fecham venda direto no WhatsApp. Se o site for um gargalo, a gente aponta — e, se fizer sentido, resolve com outro produto da Jumper. Sem empurramo.
+3. **Preciso ter site?** — Não é obrigatório — muitos negócios locais fecham venda direto no WhatsApp. Mas um site bom ajuda a vender mais: você aparece quando alguém te procura pelo nome, o anúncio ganha um destino além da conversa (cardápio, agenda, portfólio, prova social) e o cliente confia mais antes de chamar. Se isso for um gargalo hoje, a gente aponta na primeira conversa — e, se fizer sentido, resolve com o produto de Site da Jumper.
 4. **Quem cria os anúncios?** — A gestão das campanhas está inclusa. A produção de criativos (fotos, vídeos, artes) é um serviço à parte: você pode usar material próprio ou contratar com a gente.
 5. **Como acompanho os resultados?** — Dashboard com visibilidade em tempo real, report textual toda semana e relatório formal mensal com call. Você nunca precisa perguntar "como está a campanha?".
 6. **Tem fidelidade?** — Trabalhamos com retainer mensal. Nosso objetivo é que você fique pelo resultado — o report semanal existe exatamente para isso.
@@ -117,6 +119,7 @@ E a mesma equipe que atende Creamy, Clínica Seven e Almeida Prado.
 E ele está vendo anúncio agora — a questão é se é o seu ou do concorrente. Chama no WhatsApp. A primeira conversa é franca: se a sua verba não der jogo, a gente fala.
 
 - Botão: **Conversar no WhatsApp**
+- Investimento mensal: **a partir de R$ 1.500,00**
 - Fineprint: Sem taxa de setup · Sem promessa de milagre · Report semanal desde a primeira semana
 
 ---
