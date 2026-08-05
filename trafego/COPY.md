@@ -61,8 +61,6 @@ Restaurante, clínica, varejo, academia e imobiliária: negócio local vive de q
 | O que medimos | Pedidos, ligações, rotas, reservas | Agendamentos, avaliações e mensagens qualificadas | Rotas, ligações, mensagens e visitas à loja | Visitas agendadas e matrículas | Leads qualificados, visitas agendadas e propostas |
 | Case / fit | Almanara — campanhas por localização, cobertura em 100% das regiões com unidades | Dra. Roseli Siqueira — funil medido do anúncio à consulta | Moldura Minuto — varejo de bairro com campanha de raio | iZi Gym — funil medido por etapa: anúncio → WhatsApp → visita → matrícula | Fit alto — segmentação por região, faixa de preço e intenção; case específico sob consulta |
 
-Fit alto também, ainda fora do seletor: **barbearias e salões de beleza**.
-
 ## COMO FUNCIONA
 
 **Da primeira conversa ao primeiro relatório em 30 dias.**

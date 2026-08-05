@@ -125,7 +125,7 @@ section[id] { scroll-margin-top: 72px; }
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 40px 0 12px;
+  margin: 40px 0 32px;
 }
 .chip {
   appearance: none;
@@ -148,20 +148,6 @@ section[id] { scroll-margin-top: 72px; }
   border-color: var(--jumper-orange);
   color: #fff;
 }
-.niche-fit {
-  margin: 0 0 32px;
-  font-size: 13px;
-  color: rgba(255,255,255,0.58);
-}
-.niche-fit span {
-  margin-right: 8px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--jumper-orange);
-}
-
 .radius-grid {
   display: grid;
   grid-template-columns: 1fr;
