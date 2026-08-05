@@ -566,7 +566,7 @@ section[id] { scroll-margin-top: 72px; }
   padding: 0 0 24px;
   font-size: 15px;
   line-height: 1.6;
-  color: rgba(255,255,255,0.88);
+  color: var(--jumper-orange);
   max-width: 64ch;
 }
 .faq-a p { margin: 0; color: inherit; }
