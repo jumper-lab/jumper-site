@@ -6,8 +6,8 @@
 <title>Cases — Jumper Studio</title>
 <meta name="description" content="Tecnologia que gera resultado. Cases reais de empresas que escalaram com rastreamento avançado, infraestrutura de dados e performance.">
 <link rel="icon" href="../assets/favicon.png">
-<link rel="stylesheet" href="../colors_and_type.css?v=1776697754140">
-<link rel="stylesheet" href="../css/site.css?v=1776697754140">
+<link rel="stylesheet" href="../colors_and_type.css?v=20260805">
+<link rel="stylesheet" href="../css/site.css?v=20260805">
 </head>
 <body>
 
@@ -36,7 +36,7 @@
     <div class="sec-eyebrow"><span class="dot"></span>Cases · 2016 — 2026</div>
     <h1 class="cases-index-title">Tecnologia que gera <em>resultado.</em></h1>
     <p class="cases-index-lede">
-      Três empresas. Três desafios diferentes. A mesma abordagem: entender o funil, construir a infraestrutura, escalar com dados confiáveis.
+      Resultados construídos em saúde, beleza, varejo, educação e operações de alta complexidade. Filtre por segmento para encontrar os desafios mais próximos do seu.
     </p>
   </div>
 </section>
@@ -44,9 +44,18 @@
 <!-- ============ CASES LIST ============ -->
 <section class="sec" style="padding-top:0;">
   <div class="wrap">
-    <div class="cases-editorial cases-index-list">
+    <div class="cases-filters" aria-label="Filtrar cases por segmento" role="group">
+      <button class="case-filter is-active" type="button" data-case-filter="all">Todos <span>6</span></button>
+      <button class="case-filter" type="button" data-case-filter="saude">Saúde <span>2</span></button>
+      <button class="case-filter" type="button" data-case-filter="beleza">Beleza <span>2</span></button>
+      <button class="case-filter" type="button" data-case-filter="varejo">Varejo <span>2</span></button>
+      <button class="case-filter" type="button" data-case-filter="servicos">Serviços <span>2</span></button>
+    </div>
 
-      <a class="case-row" href="/cases/seven.html">
+    <p class="cases-results" aria-live="polite"><strong data-case-count>6</strong> cases selecionados</p>
+    <div class="cases-editorial cases-index-list" data-cases-list>
+
+      <a class="case-row" href="/cases/seven.html" data-case-segments="saude">
         <div class="num">01</div>
         <div class="head">
           <span class="client">Clínica Seven · Saúde</span>
@@ -60,7 +69,7 @@
         <span class="arrow">Ler case <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
-      <a class="case-row" href="/cases/creamy-skelt.html">
+      <a class="case-row" href="/cases/creamy-skelt.html" data-case-segments="beleza varejo">
         <div class="num">02</div>
         <div class="head">
           <span class="client">Creamy Skin Care · Cosméticos</span>
@@ -74,7 +83,7 @@
         <span class="arrow">Ler case <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
-      <a class="case-row" href="/cases/almeida-prado.html">
+      <a class="case-row" href="/cases/almeida-prado.html" data-case-segments="saude varejo">
         <div class="num">03</div>
         <div class="head">
           <span class="client">Almeida Prado · Homeopatia</span>
@@ -87,6 +96,39 @@
         </div>
         <span class="arrow">Ler case <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
+
+      <article class="case-row case-row-confidential" data-case-segments="servicos">
+        <div class="num">04</div>
+        <div class="head">
+          <span class="client">Grupo educacional · Serviços</span>
+          <h3>Uma operação comercial finalmente passou a enxergar o caminho entre lead e matrícula.</h3>
+          <p class="body">Integração entre mídia, CRM e conversões offline para dar visibilidade à jornada completa. Projeto sob confidencialidade.</p>
+        </div>
+        <div class="metric"><span class="val">360°</span><span class="lbl">Visão do funil</span></div>
+        <span class="arrow case-confidential-label">Projeto confidencial</span>
+      </article>
+
+      <article class="case-row case-row-confidential" data-case-segments="servicos">
+        <div class="num">05</div>
+        <div class="head">
+          <span class="client">Rede de serviços · B2C</span>
+          <h3>Atendimento, qualificação e agenda passaram a falar a mesma língua.</h3>
+          <p class="body">Automação de conversas e rotas de atendimento desenhadas para reduzir atrito antes do primeiro contato humano. Projeto sob confidencialidade.</p>
+        </div>
+        <div class="metric"><span class="val">24/7</span><span class="lbl">Operação assistida</span></div>
+        <span class="arrow case-confidential-label">Projeto confidencial</span>
+      </article>
+
+      <article class="case-row case-row-confidential" data-case-segments="beleza">
+        <div class="num">06</div>
+        <div class="head">
+          <span class="client">Marca de dermocosméticos · Beleza</span>
+          <h3>Dados de e-commerce e mídia reorganizados para fazer o investimento voltar a ter referência.</h3>
+          <p class="body">Auditoria de eventos, catálogo e mensuração para recuperar confiança nas decisões de aquisição. Projeto sob confidencialidade.</p>
+        </div>
+        <div class="metric"><span class="val">1</span><span class="lbl">Fonte de verdade</span></div>
+        <span class="arrow case-confidential-label">Projeto confidencial</span>
+      </article>
 
     </div>
   </div>
@@ -126,5 +168,6 @@
 
 <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 <script src="../js/gradient.js"></script>
+<script src="../js/cases-filter.js"></script>
 </body>
 </html>
