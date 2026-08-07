@@ -52,14 +52,14 @@ Todo mês tem dinheiro indo embora em campanha que ninguém sabe dizer o que tro
 
 **Seu negócio tem um raio. A gente trabalha dentro dele.**
 
-Restaurante, clínica, varejo, academia e imobiliária: negócio local vive de quem está perto. Escolha o seu e veja como a campanha muda.
+Restaurante, clínica, varejo e academia: negócio local vive de quem está perto. Escolha o seu e veja como a campanha muda.
 
-| | Restaurante | Estética / odonto | Varejo local | Academia | Imobiliária |
-|---|---|---|---|---|---|
-| Momento da decisão | Fome, agora, perto | Desejo, confiança e decisão local | Necessidade, desejo e conveniência | Segunda-feira, verão, recomeço | Mudança de vida + oportunidade certa |
-| Canal principal | Google Pesquisa + Meta no raio das unidades | Google (intenção) + Meta (descoberta e prova social) | Google Pesquisa + Meta por região | Meta (gera demanda) + Google (captura) | Meta (descoberta) + Google (intenção por região) |
-| O que medimos | Pedidos, ligações, rotas, reservas | Agendamentos, avaliações e mensagens qualificadas | Rotas, ligações, mensagens e visitas à loja | Visitas agendadas e matrículas | Leads qualificados, visitas agendadas e propostas |
-| Case / fit | Almanara — campanhas por localização, cobertura em 100% das regiões com unidades | Dra. Roseli Siqueira — funil medido do anúncio à consulta | Moldura Minuto — varejo de bairro com campanha de raio | iZi Gym — funil medido por etapa: anúncio → WhatsApp → visita → matrícula | Fit alto — segmentação por região, faixa de preço e intenção; case específico sob consulta |
+| | Restaurante | Estética / odonto | Varejo local | Academia |
+|---|---|---|---|---|
+| Momento da decisão | Fome, agora, perto | Desejo, confiança e decisão local | Necessidade, desejo e conveniência | Segunda-feira, verão, recomeço |
+| Canal principal | Google Pesquisa + Meta no raio das unidades | Google (intenção) + Meta (descoberta e prova social) | Google Pesquisa + Meta por região | Meta (gera demanda) + Google (captura) |
+| O que medimos | Pedidos, ligações, rotas, reservas | Agendamentos, avaliações e mensagens qualificadas | Rotas, ligações, mensagens e visitas à loja | Visitas agendadas e matrículas |
+| Case / fit | Almanara — campanhas por localização, cobertura em 100% das regiões com unidades | Dra. Roseli Siqueira — funil medido do anúncio à consulta | Moldura Minuto — varejo de bairro com campanha de raio | iZi Gym — funil medido por etapa: anúncio → WhatsApp → visita → matrícula |
 
 ## COMO FUNCIONA
 

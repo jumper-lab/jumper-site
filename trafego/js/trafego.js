@@ -63,13 +63,6 @@
       medida: 'Visitas agendadas e matrículas.',
       case: '<b>iZi Gym</b> — funil medido por etapa: anúncio → WhatsApp → visita → matrícula.',
       blips: 14
-    },
-    imobiliaria: {
-      momento: 'Mudança de vida + oportunidade certa.',
-      canal: 'Meta (descoberta) + Google (intenção por região).',
-      medida: 'Leads qualificados, visitas agendadas e propostas.',
-      case: '<b>Fit alto</b> — segmentação por região, faixa de preço e intenção; case específico sob consulta.',
-      blips: 15
     }
   };
 
