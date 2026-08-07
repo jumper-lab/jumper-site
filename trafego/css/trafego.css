@@ -121,6 +121,12 @@ section[id] { scroll-margin-top: 72px; }
 
 /* ============ O RAIO — CHIPS + RADAR + PANEL ============ */
 
+.radius-title {
+  max-width: none;
+  text-wrap: wrap;
+}
+.radius-title > span { display: block; }
+
 .niche-chips {
   display: flex;
   flex-wrap: wrap;
