@@ -211,10 +211,17 @@
     return bits.length ? ' [' + bits.join('/') + ']' : '';
   })();
 
+  var WM_VARIANT = window.WM_VARIANT || null; /* setado pelo script inline do <head> */
+  var nichePicked = false;
+
   function waHref(niche, model) {
-    var msg = 'Olá! Vi o Jumper Webmaster e quero meu site por R$ 2.980*. Tenho ' + NICHES[niche].term + '.';
+    var msg = 'Olá! Vi o Jumper Webmaster e quero meu site por R$ 2.980*.';
+    /* na variante A o picker sai da página e o carrossel não roda —
+       só afirma o nicho se o visitante escolheu de fato */
+    if (WM_VARIANT !== 'a' || nichePicked || model) msg += ' Tenho ' + NICHES[niche].term + '.';
     if (model) msg += ' Quero começar com o modelo ' + model + '.';
     msg += utm;
+    if (WM_VARIANT) msg += ' [WM-' + WM_VARIANT.toUpperCase() + ']';
     return 'https://wa.me/5521964369191?text=' + encodeURIComponent(msg);
   }
 
@@ -297,6 +304,7 @@
 
   document.querySelectorAll('[data-niche-btn]').forEach(function (b) {
     b.addEventListener('click', function () {
+      nichePicked = true;
       setNiche(b.getAttribute('data-niche-btn'));
       restartHeroCarousel();
     });
@@ -735,13 +743,41 @@
     }, 0);
   });
 
-  /* tracking (Pixel/GA4 — plugar IDs ao publicar) */
+  /* tracking de conversão — Lead (Pixel + CAPI, dedup por event_id) só em clique de WhatsApp */
+  function readCookie(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : undefined;
+  }
   document.addEventListener('click', function (ev) {
     var el = ev.target.closest('[data-cta]');
     if (!el) return;
     var pos = el.getAttribute('data-cta') || 'cta';
-    if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'webmaster_' + pos });
-    if (typeof gtag === 'function') gtag('event', 'click_cta', { id: 'webmaster_' + pos, niche: current });
+    var variant = WM_VARIANT || undefined;
+    if (typeof gtag === 'function') gtag('event', 'click_cta', { id: 'webmaster_' + pos, niche: current, wm_variant: variant });
+    if (!el.classList.contains('js-wa')) return;
+
+    var eventId = 'wm-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', { content_name: 'webmaster_' + pos, wm_variant: variant }, { eventID: eventId });
+    }
+    try {
+      var payload = JSON.stringify({
+        event_name: 'Lead',
+        event_id: eventId,
+        event_source_url: location.href,
+        variant: variant,
+        fbp: readCookie('_fbp'),
+        fbc: readCookie('_fbc'),
+        data: { content_name: 'webmaster_' + pos }
+      });
+      var sent = false;
+      if (navigator.sendBeacon) {
+        try { sent = navigator.sendBeacon('/api/track', new Blob([payload], { type: 'application/json' })); } catch (e2) {}
+      }
+      if (!sent && typeof fetch === 'function') {
+        fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(function () {});
+      }
+    } catch (e) { /* beacon é best-effort — o clique nunca pode quebrar */ }
   });
 
   setNiche('food');
@@ -875,9 +911,9 @@
   var intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
   intro
     .from('.wm-hero .sec-eyebrow', { y: 16, opacity: 0, duration: 0.5 }, 0.05)
-    .from('.wm-headline .w', { y: 34, opacity: 0, duration: 0.7, stagger: 0.045 }, 0.15)
-    .from('.wm-price-pair', { y: 24, opacity: 0, duration: 0.6 }, 0.55)
-    .from('.wm-claim, .wm-picker, .wm-ctas, .wm-fineprint, .wm-hero-rail', {
+    .from('.wm-hero .wm-headline .w', { y: 34, opacity: 0, duration: 0.7, stagger: 0.045 }, 0.15)
+    .from('.wm-hero .wm-price-pair', { y: 24, opacity: 0, duration: 0.6 }, 0.55)
+    .from('.wm-hero .wm-claim, .wm-hero .wm-picker, .wm-hero .wm-ctas, .wm-hero .wm-fineprint, .wm-hero-rail', {
       y: 18, opacity: 0, duration: 0.55, stagger: 0.08
     }, 0.7)
     .from('.wm-phone', { y: 46, opacity: 0, duration: 0.9, ease: 'power2.out' }, 0.5)
@@ -1054,4 +1090,82 @@
   });
 
   ST.refresh();
+})();
+
+/* ============================================
+   VSL — Cloudflare Stream: eventos de vídeo + reveal da variante B
+   Ativa sozinho quando existe <iframe id="wm-vsl-iframe"> na página.
+   Fora do IIFE principal de propósito: roda mesmo sem GSAP /
+   com prefers-reduced-motion (o IIFE acima tem return precoce).
+   ============================================ */
+(function () {
+  'use strict';
+
+  var iframe = document.getElementById('wm-vsl-iframe');
+  if (!iframe) return;
+
+  var html = document.documentElement;
+  var variant = window.WM_VARIANT || null;
+  var REVEAL_AT = 143; /* 2:23 — momento em que a oferta entra na VSL */
+
+  function track(name, params) {
+    var p = params || {};
+    if (variant) p.wm_variant = variant;
+    if (typeof gtag === 'function') gtag('event', name, p);
+    if (typeof fbq === 'function') fbq('trackCustom', name, p);
+  }
+
+  var revealed = html.classList.contains('wm-revealed');
+  function reveal() {
+    if (variant !== 'b' || revealed) return;
+    revealed = true;
+    html.classList.add('wm-revealed');
+    try { localStorage.setItem('wm_vsl_revealed', '1'); } catch (e) {}
+    track('vsl_reveal', {});
+    if (window.ScrollTrigger) { try { window.ScrollTrigger.refresh(); } catch (e) {} }
+    /* a página inteira voltou acima e abaixo do player —
+       scroll suave até a oferta pra ancorar o visitante nela */
+    var offer = document.getElementById('vsl-offer');
+    if (offer) {
+      setTimeout(function () {
+        try { offer.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) {}
+      }, 150);
+    }
+  }
+
+  var sdk = document.createElement('script');
+  sdk.src = 'https://embed.cloudflarestream.com/embed/sdk.latest.js';
+  sdk.async = true;
+  sdk.onload = function () {
+    if (typeof window.Stream !== 'function') return;
+    var player = window.Stream(iframe);
+    var played = false;
+    var fired = {};
+
+    player.addEventListener('play', function () {
+      if (played) return;
+      played = true;
+      track('video_play', {});
+    });
+
+    player.addEventListener('timeupdate', function () {
+      var t = player.currentTime || 0;
+      if (t >= REVEAL_AT) reveal();
+      var d = player.duration || 0;
+      if (!d) return;
+      var pct = (t / d) * 100;
+      [25, 50, 75, 95].forEach(function (m) {
+        if (pct >= m && !fired[m]) {
+          fired[m] = true;
+          track('video_progress', { percent: m });
+        }
+      });
+    });
+
+    player.addEventListener('ended', function () {
+      track('video_complete', {});
+      reveal(); /* rede de segurança: vídeo acabou = oferta vista */
+    });
+  };
+  document.head.appendChild(sdk);
 })();
