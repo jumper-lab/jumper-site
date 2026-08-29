@@ -1,0 +1,18 @@
+// Configuração do Worker jumper-site (Cloudflare Workers + static assets).
+// Deploy local: npx wrangler deploy · Workers Builds usa este mesmo arquivo.
+{
+  "name": "jumper-site",
+  "account_id": "e23efa36a1e09015eebb2b36bdfcf201",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-08-29",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    // /contato serve contato.html (paridade com o cleanUrls da Vercel)
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none",
+    // só /api/* passa pelo worker; todo o resto sai direto dos assets
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": { "enabled": true }
+}

@@ -1,6 +1,23 @@
+/* Worker do jumper-site: assets estáticos + POST /api/track (Meta CAPI).
+   O token do CAPI vive APENAS no secret META_CAPI_TOKEN do worker
+   (1Password → wrangler secret put). Sem o secret, a rota vira no-op 204. */
+
 const PIXEL_ID = '2300032824240212';
 
-export async function onRequestPost({ request, env }) {
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === '/api/track') {
+      if (request.method !== 'POST') return new Response(null, { status: 405 });
+      return handleTrack(request, env);
+    }
+
+    return env.ASSETS.fetch(request);
+  }
+};
+
+async function handleTrack(request, env) {
   if (!env.META_CAPI_TOKEN) return new Response(null, { status: 204 });
 
   let body = null;
