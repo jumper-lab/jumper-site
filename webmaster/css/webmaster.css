@@ -2065,8 +2065,9 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     overflow: hidden;
   }
-  /* com o showpiece ativo, o calendário vira um eco compacto */
-  body.has-build .cal { margin-top: 56px; }
+  /* A cena já conta o processo inteiro. No desktop, não repetimos o mesmo
+     conteúdo logo abaixo; em telas menores o calendário segue como fallback. */
+  body.has-build .cal { display: none; }
 
   .build-inner {
     max-width: 1320px;

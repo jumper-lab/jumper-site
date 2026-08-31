@@ -996,8 +996,9 @@
         start: 'top top+=64',
         end: '+=320%',
         pin: true,
-        scrub: 0.6,
-        anticipatePin: 1
+        scrub: 0.35,
+        anticipatePin: 0,
+        invalidateOnRefresh: true
       },
       defaults: { ease: 'none' }
     });
