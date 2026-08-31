@@ -959,10 +959,7 @@
 
   /* ---------- A CONSTRUÇÃO: 14 dias em um scroll (desktop) ---------- */
   var buildPin = document.querySelector('.build-pin');
-  /* O corte traffic deve seguir em rolagem contínua. A cena pinada é um
-     showpiece exclusivo do flagship; no fluxo padrão, o calendário abaixo
-     entrega o mesmo conteúdo sem prender, pular ou repetir o último quadro. */
-  if (cinematic && buildPin && window.innerWidth >= 900) {
+  if (buildPin && window.innerWidth >= 900) {
     document.body.classList.add('has-build');
 
     var dayNum = document.getElementById('build-day-num');
