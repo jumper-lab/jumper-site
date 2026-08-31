@@ -2048,7 +2048,13 @@
 .build-pin { display: none; }
 
 @media (min-width: 900px) {
+  /* A cena depende do GSAP para alternar etapas que ocupam a mesma posição.
+     Mantemos o calendário estático como fallback até a timeline estar ativa
+     (inclusive para prefers-reduced-motion e falha no carregamento do JS). */
   .build-pin {
+    display: none;
+  }
+  body.has-build .build-pin {
     display: block;
     width: 100vw;
     height: 90vh;
