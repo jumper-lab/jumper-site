@@ -2065,10 +2065,8 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     overflow: hidden;
   }
-  /* A cena já conta o processo inteiro. No desktop, não repetimos o mesmo
-     conteúdo logo abaixo; em telas menores o calendário segue como fallback. */
-  body.has-build .cal { display: none; }
-  body.has-build .deal-box { margin-top: clamp(56px, 7vw, 96px); }
+  /* Depois da cena animada, mantemos o calendário como resumo estático. */
+  body.has-build .cal { margin-top: 56px; }
 
   .build-inner {
     max-width: 1320px;
