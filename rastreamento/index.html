@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rastreamento Avançado — Arquitetura de rastreamento server-side · Jumper Studio</title>
+<meta name="description" content="O problema que você acha que é de campanha é de arquitetura. GTM server-side, Meta CAPI, Enhanced Conversions, GA4 e deduplicação — projeto fechado a partir de R$ 3.000, em 20 dias úteis.">
+<meta property="og:title" content="Rastreamento Avançado — o dado que sua mídia perde, medido de verdade">
+<meta property="og:description" content="Arquitetura de rastreamento server-side: cookies first-party, CAPI, Enhanced Conversions e deduplicação. Projeto fechado, documentado e validado em 20 dias úteis.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jumper.studio/rastreamento/">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css?v=2">
+<link rel="stylesheet" href="../css/site.css?v=2">
+<link rel="stylesheet" href="/rastreamento/css/rastreamento.css?v=1">
+
+<!-- Analytics — Pixel ativo; GA4/Clarity aguardam IDs. Nada carrega em localhost. -->
+<script>
+(function () {
+  var GA4_ID = '';     /* PENDENTE: measurement ID da propriedade GA4 */
+  var CLARITY_ID = ''; /* PENDENTE: project ID do Microsoft Clarity */
+  if (/^(localhost|127\.|0\.0\.0\.0|\[::1\])/.test(location.hostname)) return;
+
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2300032824240212');
+  fbq('track', 'PageView');
+
+  if (GA4_ID) {
+    var g = document.createElement('script');
+    g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+    document.head.appendChild(g);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA4_ID);
+  }
+
+  if (CLARITY_ID) {
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CLARITY_ID);
+  }
+})();
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+  src="https://www.facebook.com/tr?id=2300032824240212&ev=PageView&noscript=1"></noscript>
+
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="https://jumper.studio/" aria-label="Ir para a página inicial da Jumper"><img src="../assets/logos/jumper-white.png" alt="Jumper"></a>
+    <nav>
+      <a href="#problema">O problema</a>
+      <a href="#arquitetura">A arquitetura</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#preco">Preço</a>
+      <a href="#faq">Perguntas</a>
+    </nav>
+    <div class="cta-row">
+      <a class="btn btn-primary js-wa" href="#" target="_blank" rel="noopener" data-cta="header">Quero um diagnóstico</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO — monitor de eventos ao vivo ============ -->
+<section class="rs-hero" id="hero">
+  <canvas data-jumper-gradient aria-hidden="true"></canvas>
+  <div class="rs-hero-scrim" aria-hidden="true"></div>
+
+  <div class="wrap rs-hero-grid">
+    <div class="rs-hero-copy">
+      <div class="sec-eyebrow"><span class="dot"></span>Rastreamento Avançado · arquitetura server-side</div>
+
+      <h1 class="rs-headline">
+        O problema que você acha que é de campanha é de <span class="hot">arquitetura</span>.
+      </h1>
+
+      <p class="rs-claim">
+        iOS corta o cookie, o ad blocker come o pixel e a plataforma conta a mesma venda duas vezes.
+        Sua verba está sendo otimizada sobre dado furado. A gente constrói a arquitetura de
+        rastreamento que torna o invisível mensurável — server-side, no seu domínio, deduplicada e documentada.
+      </p>
+
+      <div class="rs-price-line">
+        <span class="rs-price-num">R$ 3.000<span class="per">+</span></span>
+        <span class="rs-price-cap">projeto fechado, por escopo · <b>20 dias úteis</b> · sem mensalidade</span>
+      </div>
+
+      <div class="rs-ctas">
+        <a class="btn btn-primary btn-lg js-wa" href="#" target="_blank" rel="noopener" data-cta="hero">
+          Quero um diagnóstico do meu rastreamento
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost btn-lg" href="#arquitetura">
+          Ver a arquitetura
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+      </div>
+
+      <div class="rs-proofrow">
+        <span>R$ 100M+ em verba medida</span>
+        <span class="sep">·</span>
+        <span>GTM server-side no seu domínio</span>
+        <span class="sep">·</span>
+        <span>Meta · Google · GA4 · TikTok</span>
+      </div>
+    </div>
+
+    <!-- MONITOR — simulação de eventos chegando (decorativa; o conteúdo real está no texto) -->
+    <div class="rs-hero-demo" aria-hidden="true">
+      <div class="rs-mon">
+        <div class="rs-titlebar">
+          <span class="rs-dots"><i></i><i></i><i></i></span>
+          <span class="rs-title">tracking.suamarca.com.br · eventos ao vivo</span>
+          <span class="rs-live"><i></i>capturando</span>
+        </div>
+        <div class="rs-stats">
+          <div class="rs-stat"><b id="rs-count">0</b><span>eventos hoje</span></div>
+          <div class="rs-stat"><b id="rs-recovered">0</b><span>recuperados do bloqueio</span></div>
+          <div class="rs-stat is-ok"><b>100%</b><span>deduplicados</span></div>
+        </div>
+        <div class="rs-feed" id="rs-feed"><!-- eventos entram por JS --></div>
+      </div>
+      <div class="rs-demo-cap">Simulação — o fluxo de eventos numa arquitetura server-side da Jumper.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 O PROBLEMA ============ -->
+<section class="sec rs-problem" id="problema">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>O problema</div>
+    <p class="rs-scene rv">
+      Sua campanha pode estar melhor do que o relatório diz. Ou pior.
+      <em>Sem arquitetura, você não sabe qual dos dois.</em>
+    </p>
+    <p class="sec-lede rv">O dado morre no caminho entre o clique e o seu relatório — em três emboscadas:</p>
+
+    <div class="rs-cards rv">
+      <div class="rs-card">
+        <div class="rs-card-num">01</div>
+        <h3>iOS e Safari cortam o cookie</h3>
+        <p>O rastreamento comum morre em dias no iPhone. O cliente que clicou hoje e comprou semana que vem vira "venda orgânica" — e a campanha que trouxe ele parece ruim.</p>
+      </div>
+      <div class="rs-card">
+        <div class="rs-card-num">02</div>
+        <h3>Ad blockers comem o pixel</h3>
+        <p>Uma fatia relevante dos seus visitantes nem chega a disparar o pixel. Compras acontecem, plataforma não vê, algoritmo otimiza no escuro.</p>
+      </div>
+      <div class="rs-card">
+        <div class="rs-card-num">03</div>
+        <h3>Cada plataforma conta do seu jeito</h3>
+        <p>Meta diz uma coisa, Google outra, o faturamento uma terceira. Sem deduplicação e taxonomia, a reunião de resultados vira debate de fé.</p>
+      </div>
+    </div>
+
+    <p class="rs-problem-punch rv">O resultado: decisões de verba tomadas sobre números que não fecham. <b>A campanha não precisa mudar. A arquitetura precisa.</b></p>
+  </div>
+</section>
+
+<!-- ============ 02 A ARQUITETURA ============ -->
+<section class="sec rs-arch" id="arquitetura">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>A arquitetura</div>
+    <h2 class="sec-title rv">O dado passa a viajar <em>pelo seu domínio.</em></h2>
+    <p class="sec-lede rv">
+      Em vez de depender do navegador do visitante — onde o bloqueio acontece —, os eventos passam por um
+      servidor de rastreamento <b>seu</b>, com cookie first-party, e de lá seguem para cada plataforma,
+      deduplicados e com os parâmetros completos que o algoritmo precisa pra otimizar.
+    </p>
+
+    <div class="rs-flow rv">
+      <div class="rs-flow-node"><span class="k">origem</span><b>Navegador do cliente</b><small>GTM Web + DataLayer</small></div>
+      <div class="rs-flow-arrow"><i></i></div>
+      <div class="rs-flow-node is-core"><span class="k">o seu servidor</span><b>tracking.suamarca.com.br</b><small>GTM Server-Side · cookie first-party · anti-adblock</small></div>
+      <div class="rs-flow-arrow"><i></i></div>
+      <div class="rs-flow-node"><span class="k">destinos</span><b>Meta · Google · GA4 · TikTok</b><small>CAPI · Enhanced Conversions · Events API — com deduplicação</small></div>
+    </div>
+
+    <div class="rs-features rv">
+      <div class="rs-feature"><i>①</i><h3>GTM Web + DataLayer</h3><p>Auditoria do setup atual, remoção de conflitos e DataLayer sob medida pra sua plataforma (VTEX, Shopify, Woo, site próprio).</p></div>
+      <div class="rs-feature"><i>②</i><h3>Server-side no seu domínio</h3><p>Container GTM Server-Side dedicado, com subdomínio próprio, cookies first-party e regras anti-bloqueio.</p></div>
+      <div class="rs-feature"><i>③</i><h3>Meta CAPI com dedup</h3><p>Pixel + Conversions API com deduplicação automática e hashing de dados first-party. O evento chega uma vez — completo.</p></div>
+      <div class="rs-feature"><i>④</i><h3>Google Enhanced Conversions</h3><p>Conversões importadas do GA4 + Enhanced Conversions configurado e validado, pro Google otimizar com dado real.</p></div>
+      <div class="rs-feature"><i>⑤</i><h3>GA4 e-commerce completo</h3><p>Do view_item ao purchase, com IDs, valores e promoções — o funil inteiro legível no analytics.</p></div>
+      <div class="rs-feature"><i>⑥</i><h3>Documentação e taxonomia</h3><p>Documentação técnica completa, taxonomia de eventos padronizada e mapa de parâmetros por plataforma. Nada fica na cabeça de ninguém.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 COMO FUNCIONA ============ -->
+<section class="sec rs-how" id="como-funciona">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>Como funciona</div>
+    <h2 class="sec-title rv">Projeto fechado. <em>20 dias úteis.</em></h2>
+    <p class="sec-lede rv">Prazo contado a partir da aprovação e da liberação dos acessos — e termina com tudo testado e documentado.</p>
+
+    <div class="rs-timeline rv">
+      <div class="rs-phase"><span class="d">dias 1–3</span><h3>Auditoria</h3><p>Setup atual, conflitos, acessos às plataformas.</p></div>
+      <div class="rs-phase"><span class="d">dias 4–6</span><h3>Arquitetura</h3><p>Desenho da solução — e sua aprovação antes de qualquer implementação.</p></div>
+      <div class="rs-phase"><span class="d">dias 7–12</span><h3>Implementação web</h3><p>GTM Web, DataLayer, cross-domain.</p></div>
+      <div class="rs-phase"><span class="d">dias 13–16</span><h3>Server-side</h3><p>sGTM, CAPI, Enhanced Conversions, Events API.</p></div>
+      <div class="rs-phase"><span class="d">dias 17–20</span><h3>QA + documentação</h3><p>Validação em todas as plataformas e entrega documentada.</p></div>
+    </div>
+
+    <div class="rs-deliver rv">
+      <div class="rs-deliver-col">
+        <h3>Você recebe</h3>
+        <ul>
+          <li>Arquitetura completa no ar, validada plataforma por plataforma (Tag Assistant, Events Manager, GA4 DebugView)</li>
+          <li>Documentação técnica completa + taxonomia de eventos</li>
+          <li><b>30 dias de suporte</b> pós-implementação, com correções ilimitadas dentro do escopo</li>
+        </ul>
+      </div>
+      <div class="rs-deliver-col">
+        <h3>Você fornece</h3>
+        <ul>
+          <li>Acessos: GTM, Meta Business Manager, Google Ads, GA4 e plataforma do site</li>
+          <li>Hospedagem do servidor de rastreamento (~US$ 20–50/mês, na sua conta — sem intermediação)</li>
+          <li>Um responsável pra aprovar a arquitetura na primeira semana</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 PREÇO ============ -->
+<section class="sec rs-preco" id="preco">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>Preço</div>
+    <h2 class="sec-title rv">Projeto fechado, <em>a partir de R$ 3.000.</em></h2>
+
+    <div class="rs-preco-grid rv">
+      <div class="rs-preco-main">
+        <div class="rs-preco-num">R$ 3.000<span class="per">+</span></div>
+        <p>O valor exato sai do escopo — definido e aprovado por você antes de começar. O que move o orçamento:</p>
+        <ul>
+          <li>Quantas plataformas de mídia entram (Meta, Google, TikTok…)</li>
+          <li>E-commerce completo ou funil de leads</li>
+          <li>Quantos domínios, lojas ou marcas</li>
+          <li>Integrações extras (CRM, ferramentas de engajamento)</li>
+        </ul>
+      </div>
+      <div class="rs-preco-side">
+        <h3>Sem letra miúda</h3>
+        <ul>
+          <li><b>Sem mensalidade</b> — é projeto, não retainer</li>
+          <li>Hospedagem do sGTM na sua conta (~US$ 20–50/mês) — o servidor é seu, a independência também</li>
+          <li>Não inclui gestão de mídia nem alterações no site além do rastreamento</li>
+          <li>30 dias de suporte inclusos após a entrega</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 FRONTEIRA HONESTA ============ -->
+<section class="sec rs-fit" id="pra-quem">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>Uma franqueza</div>
+    <h2 class="sec-title rv">Talvez você <em>não</em> precise disso.</h2>
+    <div class="rs-fit-grid rv">
+      <div class="rs-fit-col is-yes">
+        <h3>Este projeto é pra você se</h3>
+        <ul>
+          <li>Você roda mídia com volume e <b>não confia no número</b> que vê</li>
+          <li>Tem e-commerce, mais de uma marca/domínio, ou funil com etapas fora do site</li>
+          <li>Meta, Google e faturamento contam três histórias diferentes</li>
+        </ul>
+      </div>
+      <div class="rs-fit-col is-no">
+        <h3>Não é pra você se</h3>
+        <ul>
+          <li>Você precisa do rastreamento <b>básico</b> — ele já vem incluso na nossa <a href="/trafego/">Gestão de Tráfego</a>, sem projeto à parte</li>
+          <li>Não roda mídia paga nem pretende rodar</li>
+          <li>Procura alguém pra "instalar um pixel" — isso não é arquitetura</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 PROVA ============ -->
+<section class="sec rs-proof" id="prova">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>Quem constrói</div>
+    <h2 class="sec-title rv">A equipe que mediu <em>R$ 100 milhões</em> em verba.</h2>
+
+    <div class="rs-metrics rv">
+      <div class="rs-metric"><b>R$ 100M+</b><span>em verba de mídia medida</span></div>
+      <div class="rs-metric"><b>50+</b><span>empresas atendidas</span></div>
+      <div class="rs-metric"><b>10</b><span>anos de mercado</span></div>
+    </div>
+
+    <div class="rs-clients rv">
+      <p class="rs-clients-cap">Arquitetura server-side no ar em</p>
+      <div class="rs-client-chips">
+        <span class="rs-chip"><b>Creamy</b><small>skincare · e-commerce</small></span>
+        <span class="rs-chip"><b>Skelt</b><small>beleza · e-commerce</small></span>
+        <span class="rs-chip"><b>TJL</b><small>e-commerce</small></span>
+        <span class="rs-chip"><b>Bylish</b><small>beleza · e-commerce</small></span>
+      </div>
+      <p class="rs-clients-note">A mesma stack, do DataLayer à deduplicação, padronizada e documentada em cada uma.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 FAQ ============ -->
+<section class="sec rs-faq" id="faq">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>Perguntas diretas</div>
+    <div class="rs-faq-list rv">
+      <details>
+        <summary>Já tenho o pixel instalado. Não basta?</summary>
+        <p>O pixel web sozinho perde uma fatia relevante das conversões — iOS, Safari e ad blockers cortam o caminho. O server-side recupera esse dado e entrega pro algoritmo o que ele precisa pra otimizar. É a diferença entre a plataforma ver metade do filme ou o filme inteiro.</p>
+      </details>
+      <details>
+        <summary>Funciona com a minha plataforma?</summary>
+        <p>Trabalhamos com VTEX, Shopify, WooCommerce e sites próprios. O DataLayer é desenhado sob medida pra estrutura da sua loja — inclusive checkout em domínio separado, com cross-domain configurado.</p>
+      </details>
+      <details>
+        <summary>Quanto tempo leva?</summary>
+        <p>20 dias úteis a partir da aprovação e da liberação dos acessos: auditoria, desenho da arquitetura (que você aprova antes), implementação web, server-side e QA com documentação.</p>
+      </details>
+      <details>
+        <summary>Tem mensalidade?</summary>
+        <p>O projeto, não. A hospedagem do servidor de rastreamento (~US$ 20–50/mês) fica na sua conta — o servidor é seu, você não fica refém de ninguém. Depois da entrega, você leva 30 dias de suporte inclusos.</p>
+      </details>
+      <details>
+        <summary>Como eu sei que está funcionando?</summary>
+        <p>Validação plataforma por plataforma, com você olhando: Tag Assistant, Meta Events Manager (com dedup ativa), GA4 DebugView. E tudo documentado — taxonomia de eventos e mapa de parâmetros incluídos na entrega.</p>
+      </details>
+      <details>
+        <summary>Vocês também operam as campanhas?</summary>
+        <p>Sim — é outro produto, a <a href="/trafego/">Gestão de Tráfego</a>. E uma franqueza: o rastreamento <b>básico</b> já vem incluso nela. Este projeto é pra quem precisa da arquitetura completa.</p>
+      </details>
+      <details>
+        <summary>Por que "a partir de" R$ 3.000?</summary>
+        <p>Porque escopo varia: um funil de leads com Meta + Google é uma coisa; três e-commerces com TikTok e CRM integrado é outra. O valor exato sai por escrito na proposta, antes de qualquer trabalho — projeto fechado, sem surpresa no meio.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="sec rs-final" id="cta-final">
+  <div class="wrap">
+    <h2 class="rs-final-title rv">Quanto da sua verba está sendo otimizada<br><em>sobre dado que não existe?</em></h2>
+    <div class="rs-ctas rv">
+      <a class="btn btn-primary btn-lg js-wa" href="#" target="_blank" rel="noopener" data-cta="final">
+        Quero um diagnóstico do meu rastreamento
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <p class="rs-fineprint rv">Projeto fechado a partir de R$ 3.000 · 20 dias úteis · 30 dias de suporte · sem mensalidade</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <img class="footer-logo" src="../assets/logos/jumper-white.png" alt="Jumper">
+    <p class="footer-tagline">Jumper Studio · Tecnologia e performance digital</p>
+    <div class="footer-links">
+      <a href="https://jumper.studio">jumper.studio</a>
+      <span class="sep">·</span>
+      <a href="mailto:contato@jumper.studio">contato@jumper.studio</a>
+    </div>
+    <div class="footer-legal">
+      <a href="../politica-de-privacidade.html">Política de Privacidade</a>
+      <span class="sep">·</span>
+      <a href="../termos.html">Termos de Serviço</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/gradient.js"></script>
+<script src="/rastreamento/js/rastreamento.js?v=1"></script>
+</body>
+</html>
