@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JumperChat — O WhatsApp da empresa no meio da equipe</title>
+<meta name="description" content="Plataforma de atendimento da Jumper: um número da empresa, a equipe inteira atendendo. Setores, etiquetas, histórico central e IA de recepção. A partir de R$ 500/mês, teste grátis de 15 dias.">
+<meta property="og:title" content="JumperChat — O WhatsApp da empresa no meio da equipe">
+<meta property="og:description" content="Um número da casa, vários atendentes. Setores, etiquetas, passagem sem perder o fio — e histórico que não mora no celular de ninguém. Teste 15 dias.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jumper.studio/chat/">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css?v=2">
+<link rel="stylesheet" href="../css/site.css?v=2">
+<link rel="stylesheet" href="/chat/css/chat.css?v=1">
+
+<!-- Analytics — Pixel ativo; GA4/Clarity aguardam IDs. Nada carrega em localhost. -->
+<script>
+(function () {
+  var GA4_ID = '';     /* PENDENTE: measurement ID da propriedade GA4 */
+  var CLARITY_ID = ''; /* PENDENTE: project ID do Microsoft Clarity */
+  if (/^(localhost|127\.|0\.0\.0\.0|\[::1\])/.test(location.hostname)) return;
+
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2300032824240212');
+  fbq('track', 'PageView');
+
+  if (GA4_ID) {
+    var g = document.createElement('script');
+    g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+    document.head.appendChild(g);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA4_ID);
+  }
+
+  if (CLARITY_ID) {
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CLARITY_ID);
+  }
+})();
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+  src="https://www.facebook.com/tr?id=2300032824240212&ev=PageView&noscript=1"></noscript>
+
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="https://jumper.studio/" aria-label="Ir para a página inicial da Jumper"><img src="../assets/logos/jumper-white.png" alt="Jumper"></a>
+    <nav>
+      <a href="#mesa">A mesa</a>
+      <a href="#ia">IA de recepção</a>
+      <a href="#precos">Preços</a>
+      <a href="#faq">Perguntas</a>
+    </nav>
+    <div class="cta-row">
+      <a class="btn btn-primary js-wa" href="#" target="_blank" rel="noopener" data-cta="header">Testar 15 dias grátis</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO — a mesa ao vivo ============ -->
+<section class="jc-hero" id="hero">
+  <canvas data-jumper-gradient aria-hidden="true"></canvas>
+  <div class="jc-hero-scrim" aria-hidden="true"></div>
+
+  <div class="wrap jc-hero-grid">
+    <div class="jc-hero-copy">
+      <div class="sec-eyebrow"><span class="dot"></span>JumperChat · Plataforma de atendimento</div>
+
+      <h1 class="jc-headline">
+        O WhatsApp da empresa no meio da <span class="hot">equipe</span>.
+        Não no bolso de alguém.
+      </h1>
+
+      <p class="jc-claim">
+        Um número da casa, todo mundo atendendo: setores, etiquetas, passagem de
+        atendente sem perder o fio — e um histórico que não mora no celular de ninguém.
+        Feito pra atender no computador.
+      </p>
+
+      <div class="jc-price-line">
+        <span class="jc-price-num">R$ 500<span class="per">/mês</span></span>
+        <span class="jc-price-cap">plano básico · 5 atendentes · <b>15 dias grátis</b></span>
+      </div>
+
+      <div class="jc-ctas">
+        <a class="btn btn-primary btn-lg js-wa" href="#" target="_blank" rel="noopener" data-cta="hero">
+          Quero testar por 15 dias
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost btn-lg" href="#mesa">
+          Ver a mesa
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+      </div>
+
+      <div class="jc-proofrow">
+        <span>1 número, vários atendentes</span>
+        <span class="sep">·</span>
+        <span>Setores e etiquetas</span>
+        <span class="sep">·</span>
+        <span>Histórico central</span>
+        <span class="sep">·</span>
+        <span>IA de recepção opcional</span>
+      </div>
+    </div>
+
+    <!-- A MESA AO VIVO — simulação animada (decorativa; conteúdo real está no texto) -->
+    <div class="jc-hero-demo" aria-hidden="true">
+      <div class="jc-app">
+        <div class="jc-titlebar">
+          <span class="jc-dots"><i></i><i></i><i></i></span>
+          <span class="jc-title">JumperChat · Caixa de entrada da empresa</span>
+          <span class="jc-online">equipe online <i></i></span>
+        </div>
+        <div class="jc-body">
+          <aside class="jc-list">
+            <div class="jc-chatitem is-active">
+              <span class="jc-avatar av-m">M</span>
+              <span class="jc-chatinfo"><b>Marina Lopes</b><small id="jc-preview">agora · novo contato</small></span>
+              <span class="jc-badge" id="jc-badge">1</span>
+            </div>
+            <div class="jc-chatitem">
+              <span class="jc-avatar av-j">J</span>
+              <span class="jc-chatinfo"><b>João Prado</b><small>Suporte · com Rafa</small></span>
+            </div>
+            <div class="jc-chatitem">
+              <span class="jc-avatar av-g">G</span>
+              <span class="jc-chatinfo"><b>Grupo · Cond. Ipê</b><small>Pós-venda · com Duda</small></span>
+            </div>
+            <div class="jc-chatitem">
+              <span class="jc-avatar av-c">C</span>
+              <span class="jc-chatinfo"><b>Dra. Carla</b><small>Comercial · resolvida ✓</small></span>
+            </div>
+          </aside>
+          <div class="jc-thread">
+            <div class="jc-threadhead">
+              <b>Marina Lopes</b>
+              <span class="jc-tag" id="jc-tag">novo contato</span>
+              <span class="jc-owner" id="jc-owner">sem dono</span>
+            </div>
+            <div class="jc-msgs" id="jc-msgs"><!-- mensagens entram por JS --></div>
+            <div class="jc-inputbar"><span>Responder como <b id="jc-as">IA de recepção</b></span><i class="jc-send"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="jc-demo-cap">Simulação da mesa — o fluxo real de um atendimento no JumperChat.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 O PROBLEMA ============ -->
+<section class="sec jc-problem" id="problema">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>O problema</div>
+    <p class="jc-scene rv">
+      Terça, 11h. Três clientes chamam no WhatsApp ao mesmo tempo.
+      O número está no celular do sócio — <em>que está em reunião.</em>
+    </p>
+    <p class="sec-lede rv">Enquanto o atendimento viver num aparelho pessoal, a empresa atende no escuro:</p>
+
+    <div class="jc-cards rv">
+      <div class="jc-card">
+        <div class="jc-card-num">A</div>
+        <h3>O histórico é de uma pessoa</h3>
+        <p>A conversa mora no aparelho de alguém. Férias, almoço, demissão — e o atendimento some junto.</p>
+      </div>
+      <div class="jc-card">
+        <div class="jc-card-num">B</div>
+        <h3>O handoff é um print</h3>
+        <p>Passar o cliente pra outra pessoa vira screenshot no grupo. O contexto se perde no caminho.</p>
+      </div>
+      <div class="jc-card">
+        <div class="jc-card-num">C</div>
+        <h3>O cliente repete a história</h3>
+        <p>Cada atendente recomeça do zero. Pro cliente, isso tem nome: descaso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 A MESA ============ -->
+<section class="sec jc-mesa" id="mesa">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>A mesa</div>
+    <h2 class="sec-title rv">Um número da casa. <em>A equipe inteira em volta.</em></h2>
+    <p class="sec-lede rv">
+      O JumperChat coloca o WhatsApp da empresa numa tela grande, no computador,
+      com todo mundo trabalhando no mesmo lugar — sem ninguém carregar o atendimento no bolso.
+    </p>
+
+    <div class="jc-features rv">
+      <div class="jc-feature"><i>①</i><h3>Um número, várias pessoas</h3><p>O mesmo WhatsApp da empresa, com 5 atendentes no plano básico.</p></div>
+      <div class="jc-feature"><i>②</i><h3>Setores</h3><p>Comercial, suporte, pós-venda — cada conversa nasce no lugar certo.</p></div>
+      <div class="jc-feature"><i>③</i><h3>Etiquetas</h3><p>Marque, filtre e encontre qualquer conversa em segundos.</p></div>
+      <div class="jc-feature"><i>④</i><h3>Passagem sem perder o fio</h3><p>Um atendente passa pro outro e a conversa continua — sem print, sem recomeço.</p></div>
+      <div class="jc-feature"><i>⑤</i><h3>Histórico central</h3><p>Tudo que já foi conversado com cada cliente, pesquisável, da empresa.</p></div>
+      <div class="jc-feature"><i>⑥</i><h3>Grupos</h3><p>Os grupos de WhatsApp da operação, dentro da mesma mesa.</p></div>
+    </div>
+
+    <p class="jc-mesa-note rv">
+      Regra da primeira semana, acompanhada pela Jumper: <b>nenhuma conversa sem dono.</b>
+    </p>
+  </div>
+</section>
+
+<!-- ============ 03 IA DE RECEPÇÃO ============ -->
+<section class="sec jc-ia" id="ia">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>IA de recepção · adicional</div>
+    <h2 class="sec-title rv">Quem chega, é recebido. <em>Mesmo às 23h.</em></h2>
+
+    <blockquote class="jc-quote rv">
+      A IA faz o primeiro atendimento pelo WhatsApp, qualifica o contato e encaminha
+      as informações organizadas para a equipe continuar.
+    </blockquote>
+
+    <div class="jc-ia-grid rv">
+      <div class="jc-ia-col">
+        <h3>O que ela faz</h3>
+        <ul>
+          <li>Responde <b>texto e áudio</b> — e transcreve o áudio pra equipe</li>
+          <li>Identifica o que o contato precisa</li>
+          <li>Qualifica e etiqueta a conversa</li>
+          <li>Encaminha pro setor e pro responsável certos</li>
+        </ul>
+      </div>
+      <div class="jc-ia-col">
+        <h3>O que ela não é</h3>
+        <ul>
+          <li>Não é um botão que se aperta: é <b>configurada pro seu negócio</b> — briefing, regras, textos e testes</li>
+          <li>Fica pronta em <b>3 a 5 dias úteis</b> depois do material na nossa mão</li>
+          <li>Não fecha contrato, não negocia preço, não responde por você</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 ATENDIMENTO, NÃO DISPARO ============ -->
+<section class="sec jc-receptivo" id="receptivo">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>Uma escolha de lado</div>
+    <h2 class="sec-title rv">Atendimento, <em>não disparo.</em></h2>
+    <p class="sec-lede rv">
+      O JumperChat é uma mesa <b>receptiva</b>. Disparo em massa no número comum do WhatsApp
+      queima o número — uma dúzia de mensagens iguais já arrisca bloqueio. A gente não coloca
+      o número da sua empresa nessa roleta.
+    </p>
+    <p class="sec-lede rv">
+      Quem precisa disparar, dispara no <b>canal oficial do WhatsApp</b> (Cloud API), um módulo
+      à parte: R$ 350/mês pra ligar o canal oficial na sua mesa, ou R$ 1.000/mês com a Jumper
+      operando até 4 campanhas por mês pra você — do template ao envio.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 05 PREÇOS ============ -->
+<section class="sec jc-precos" id="precos">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>Preços</div>
+    <h2 class="sec-title rv">Começa simples. <em>Cresce quando a dor aparecer.</em></h2>
+
+    <div class="jc-pricing rv">
+      <div class="jc-plan">
+        <div class="jc-plan-head">
+          <h3>Básico</h3>
+          <div class="jc-plan-price">R$ 500<span>/mês</span></div>
+          <div class="jc-plan-trial">15 dias grátis</div>
+        </div>
+        <ul>
+          <li>1 número de WhatsApp da empresa</li>
+          <li>5 atendentes na mesa</li>
+          <li>Setores, etiquetas e passagem de atendente</li>
+          <li>Histórico centralizado e pesquisável</li>
+          <li>Grupos de WhatsApp</li>
+          <li>Setup em até 1 hora, sem taxa</li>
+          <li>Acompanhamento semanal da Jumper no teste</li>
+        </ul>
+        <a class="btn btn-primary btn-lg js-wa" href="#" target="_blank" rel="noopener" data-cta="plano-basico">
+          Começar o teste de 15 dias
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="jc-addons">
+        <h3>Adicionais <small>entram com contrato, quando fizerem sentido</small></h3>
+        <div class="jc-addon"><span class="a-name">Instagram</span><span class="a-desc">directs na mesma mesa</span><span class="a-price">R$ 200</span></div>
+        <div class="jc-addon"><span class="a-name">Facebook</span><span class="a-desc">Messenger na mesma mesa</span><span class="a-price">R$ 200</span></div>
+        <div class="jc-addon"><span class="a-name">Instagram + Facebook</span><span class="a-desc">os dois canais juntos</span><span class="a-price">R$ 300</span></div>
+        <div class="jc-addon"><span class="a-name">Kanban</span><span class="a-desc">a fila de atendimento em quadro, com capacitação</span><span class="a-price">R$ 300</span></div>
+        <div class="jc-addon"><span class="a-name">IA de recepção</span><span class="a-desc">primeiro atendimento, qualificação e encaminhamento</span><span class="a-price">R$ 300</span></div>
+        <p class="jc-seats">Cada R$ 100 na fatura soma <b>+1 assento</b> na mesa. O teste de 15 dias cobre o plano básico; canais Meta e IA entram com contrato.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 PRA QUEM É ============ -->
+<section class="sec jc-fit" id="pra-quem">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>Pra quem é</div>
+    <div class="jc-fit-grid rv">
+      <div class="jc-fit-col is-yes">
+        <h3>Faz sentido se</h3>
+        <ul>
+          <li>Mais de uma pessoa atende no WhatsApp da empresa</li>
+          <li>A dor é <b>atender</b>: SAC, comercial, pós-venda</li>
+          <li>O time toparia atender no computador, em vez do celular</li>
+        </ul>
+      </div>
+      <div class="jc-fit-col is-no">
+        <h3>Não é pra você se</h3>
+        <ul>
+          <li>Você quer disparar listas de promoção no número comum</li>
+          <li>Quer só espelhar o celular, sem mudar o jeito de atender</li>
+          <li>Espera uma IA que fecha negócio sozinha</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 COMO COMEÇA ============ -->
+<section class="sec jc-como" id="como-comeca">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>Como começa</div>
+    <div class="jc-steps rv">
+      <div class="jc-step"><i>1</i><h3>Chama no WhatsApp</h3><p>Você fala com a gente e agenda o setup. Sem formulário, sem call de vendas de 1 hora.</p></div>
+      <div class="jc-step"><i>2</i><h3>Mesa no ar em até 1h</h3><p>Conectamos o número da empresa, cadastramos a equipe e montamos os setores. O número continua o mesmo.</p></div>
+      <div class="jc-step"><i>3</i><h3>15 dias de teste de verdade</h3><p>Com acompanhamento semanal da Jumper. Meta da primeira semana: nenhuma conversa sem dono.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 FAQ ============ -->
+<section class="sec jc-faq" id="faq">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="dot"></span>Perguntas diretas</div>
+    <div class="jc-faq-list rv">
+      <details>
+        <summary>Já atendo pelo celular. Por que mudar?</summary>
+        <p>Celular não é mesa. Funciona enquanto o atendimento é de uma pessoa só — no dia em que duas atendem, o histórico vira propriedade privada e o handoff vira print. O JumperChat existe pra esse dia. E se o time for continuar 100% no celular, a gente te fala com franqueza: o valor aqui é outro.</p>
+      </details>
+      <details>
+        <summary>R$ 500 por mês pra um chat?</summary>
+        <p>Não é pelo chat — é pelo número da empresa deixar de ser pessoal. Histórico da casa, setores, passagem limpa e ninguém refém do celular de ninguém. Se o time usar, se paga no primeiro cliente que não se perdeu.</p>
+      </details>
+      <details>
+        <summary>A IA atende sozinha?</summary>
+        <p>Ela faz o primeiro atendimento, qualifica e encaminha organizado pra equipe — texto e áudio. Ela não fecha contrato, não negocia preço e não responde juridicamente por você. IA boa é a que sabe a hora de passar a bola.</p>
+      </details>
+      <details>
+        <summary>Em quanto tempo a IA fica pronta?</summary>
+        <p>3 a 5 dias úteis <b>depois</b> de recebermos o material do seu negócio: serviços, dúvidas frequentes, respostas, restrições e o processo comercial. Ela é configurada e testada pro seu contexto — não é um botão.</p>
+      </details>
+      <details>
+        <summary>Posso disparar promoções por aqui?</summary>
+        <p>Não no número comum — disparo em massa queima o número, e a gente não arrisca o WhatsApp da sua empresa. Quem precisa disparar usa o canal oficial do WhatsApp (Cloud API), que é um módulo à parte e a Jumper acompanha o que sai.</p>
+      </details>
+      <details>
+        <summary>Por que Instagram e Facebook não entram no teste?</summary>
+        <p>Porque dependem de permissões do Meta Business (dono da página, conta profissional) que não valem o atrito num teste de 15 dias. Entram na implementação, com contrato — setup em 2 a 3 horas, sem taxa.</p>
+      </details>
+      <details>
+        <summary>Preciso trocar o número da empresa?</summary>
+        <p>Não. A mesa conecta no número que você já usa — o setup leva de 30 a 60 minutos e os clientes não percebem nada, além de começarem a ser respondidos mais rápido.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="sec jc-final" id="cta-final">
+  <div class="wrap">
+    <h2 class="jc-final-title rv">O próximo cliente vai chamar no WhatsApp.<br><em>Quem atende?</em></h2>
+    <div class="jc-ctas rv">
+      <a class="btn btn-primary btn-lg js-wa" href="#" target="_blank" rel="noopener" data-cta="final">
+        Quero testar por 15 dias
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <p class="jc-fineprint rv">R$ 500/mês no plano básico · sem taxa de setup · teste grátis de 15 dias · cancele quando quiser</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <img class="footer-logo" src="../assets/logos/jumper-white.png" alt="Jumper">
+    <p class="footer-tagline">Jumper Studio · Tecnologia e performance digital</p>
+    <div class="footer-links">
+      <a href="https://jumper.studio">jumper.studio</a>
+      <span class="sep">·</span>
+      <a href="mailto:contato@jumper.studio">contato@jumper.studio</a>
+    </div>
+    <div class="footer-legal">
+      <a href="../politica-de-privacidade.html">Política de Privacidade</a>
+      <span class="sep">·</span>
+      <a href="../termos.html">Termos de Serviço</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/gradient.js"></script>
+<script src="/chat/js/chat.js?v=1"></script>
+</body>
+</html>
